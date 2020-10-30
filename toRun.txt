@@ -1,0 +1,1 @@
+python main.py --image images/parking_lot_3.png --video videos/parking_lot_3.mp4
