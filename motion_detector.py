@@ -68,6 +68,8 @@ class MotionDetector:
             # Bluring the image and Greying
             blurred = open_cv.GaussianBlur(frame.copy(), (5, 5), 3)
             grayed = open_cv.cvtColor(blurred, open_cv.COLOR_BGR2GRAY)
+            # edges = open_cv.Canny(grayed,threshold1=50,threshold2=150,apertureSize=3)
+            
             new_frame = frame.copy()
             logging.debug("new_frame: %s", new_frame)
 
@@ -126,7 +128,7 @@ class MotionDetector:
 
         # Finding Average pixels in an parking lot
         status = np.mean(np.abs(laplacian * self.mask[index])) < MotionDetector.LAPLACIAN  # Gives true/ false
-        print(np.mean(np.abs(laplacian * self.mask[index])))
+        # print(np.mean(np.abs(laplacian * self.mask[index])))
         logging.debug("status: %s", status)
 
         return status

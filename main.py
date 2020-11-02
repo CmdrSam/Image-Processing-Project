@@ -14,11 +14,14 @@ def main():
     image_file = args.image_file
     data_file = args.data_file
     start_frame = args.start_frame
+    get_coord = args.get_coord
 
-    # if image_file is not None:
-    #     with open(data_file, "w+") as points:
-    #         generator = CoordinatesGenerator(image_file, points, COLOR_RED)
-    #         generator.generate()
+    # Takes coordinates from user
+    if get_coord == "y":
+        if image_file is not None:
+            with open(data_file, "w+") as points:
+                generator = CoordinatesGenerator(image_file, points, COLOR_RED)
+                generator.generate()
 
     with open(data_file, "r") as data:
         points = yaml.load(data)
@@ -42,7 +45,7 @@ def parse_args():
     parser.add_argument("--data",
                         dest="data_file",
                         required=False,
-                        default="./data/coordinates_1.yml",
+                        default="./data/coordinates_2.yml",
                         help="Data file to be used with OpenCV")
 
     parser.add_argument("--start-frame",
@@ -50,6 +53,11 @@ def parse_args():
                         required=False,
                         default=1,
                         help="Starting frame on the video")
+
+    parser.add_argument("--coord",
+                        dest="get_coord",
+                        required=True,
+                        help="Give coordinate or not")
 
     return parser.parse_args()
 
